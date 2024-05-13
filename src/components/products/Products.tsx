@@ -8,7 +8,7 @@ export const Products = () => {
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        fetch('http://localhost:5173/fe-react-2024/data/cards')
+        fetch('http://localhost:3000/cards')
             .then((response) => response.json())
             .then((data) => setProducts(data))
             .catch((error) => console.error('Error fetching data:', error));
