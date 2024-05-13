@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import type { Product } from '../../interfaces/Product';
+import type { Product } from '../../interfaces/Product.ts';
+import Buttons from '../button/Buttons.tsx';
 
 import './products.css';
 
@@ -17,11 +18,19 @@ export const Products = () => {
     return (
         <section className="products">
             {products.map((product: Product) => (
-                <div key={product.id} className="product-card">
-                    <img src={product.images[0]} alt={product.title} />
-                    <div className="product-info">
-                        <h3>{product.title}</h3>
-                        <p>${product.price}</p>
+                <div key={product.id} className="products__card">
+                    <img className="products__card-img" src={product.images[0]} alt={product.title} />
+                    <div className="products__card-info">
+                        <h3 className="card-title">{product.title}</h3>
+                        <div className="card__descr">
+                            <p className="card__descr-price">
+                                {product.price}
+                                <span>₴</span>
+                            </p>
+                            <Buttons className="card__descr--button">
+                                <i className="bx bx-cart"></i>
+                            </Buttons>
+                        </div>
                     </div>
                 </div>
             ))}
