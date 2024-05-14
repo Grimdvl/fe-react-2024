@@ -6,4 +6,4 @@ interface Category {
     updatedAt: Date;
 }
 
-export type { Category };
+export default Category;

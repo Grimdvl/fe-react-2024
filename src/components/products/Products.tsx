@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import type { Product } from '../../interfaces/Product.ts';
+import type Product from '../../interfaces/Product.ts';
 import Buttons from '../button/Buttons.tsx';
+
+import { getDefaultCards } from './defaultCards.ts';
 
 import './products.css';
 
@@ -12,7 +14,11 @@ export const Products = () => {
         fetch('http://localhost:3000/cards')
             .then((response) => response.json())
             .then((data) => setProducts(data))
-            .catch((error) => console.error('Error fetching data:', error));
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+                const defaultCards = getDefaultCards();
+                setProducts(defaultCards);
+            });
     }, []);
 
     return (
