@@ -9,20 +9,30 @@ import './products.css';
 
 export const Products = () => {
     const [products, setProducts] = useState<Product[]>([]);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch('http://localhost:3000/cards')
             .then((response) => response.json())
-            .then((data) => setProducts(data))
+            .then((data) => {
+                setProducts(data);
+                setLoading(false);
+            })
             .catch((error) => {
                 console.error('Error fetching data:', error);
                 const defaultCards = getDefaultCards();
                 setProducts(defaultCards);
+                setLoading(false);
             });
     }, []);
 
     return (
         <section className="products">
+            {isLoading && (
+                <div className="products-loading">
+                    <i className="bx bx-loader-alt"></i>
+                </div>
+            )}
             {products.map((product: Product) => (
                 <div key={product.id} className="products__card">
                     <img className="products__card-img" src={product.images[0]} alt={product.title} />
