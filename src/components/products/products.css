@@ -57,6 +57,7 @@
   font-size: 2.4rem;
   background-color: transparent;
   cursor: pointer;
+  position: relative;
 }
 
 .products-loading {

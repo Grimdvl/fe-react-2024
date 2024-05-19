@@ -8,12 +8,13 @@ import { getDefaultCards } from './defaultCards.ts';
 import './products.css';
 
 interface ProductsProps {
-    onAddToCart: () => void;
+    onAddToCart: (newCartCount: number) => void;
 }
 
 export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setLoading] = useState(true);
+    const [cartCounts, setCartCounts] = useState<{ [key: number]: number }>({});
 
     useEffect(() => {
         fetch('http://localhost:3000/cards')
@@ -29,6 +30,25 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
                 setLoading(false);
             });
     }, []);
+
+    useEffect(() => {
+        const savedCartCounts: { [key: number]: number } = {};
+        products.forEach((product) => {
+            const count = localStorage.getItem(`cartCount_${product.id}`);
+            if (count) {
+                savedCartCounts[product.id] = Number.parseInt(count, 10);
+            }
+        });
+        setCartCounts(savedCartCounts);
+    }, [products]);
+
+    const handleAddToCart = (productId: number) => {
+        const newCartCount = (cartCounts[productId] || 0) + 1;
+        const newCartCounts = { ...cartCounts, [productId]: newCartCount };
+        setCartCounts(newCartCounts);
+        onAddToCart(Object.values(newCartCounts).reduce((a, b) => a + b, 0));
+        localStorage.setItem(`cartCount_${productId}`, newCartCount.toString());
+    };
 
     return (
         <section className="products">
@@ -47,8 +67,9 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
                                 {product.price}
                                 <span>₴</span>
                             </p>
-                            <Buttons className="card__descr--button" onClick={onAddToCart}>
+                            <Buttons className="card__descr--button" onClick={() => handleAddToCart(product.id)}>
                                 <i className="bx bx-cart"></i>
+                                {cartCounts[product.id] && <span className="cart__count">{cartCounts[product.id]}</span>}
                             </Buttons>
                         </div>
                     </div>

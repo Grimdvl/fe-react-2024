@@ -65,7 +65,7 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage }) => {
             <div className="head__cart">
                 <Buttons className="head__cart--button">
                     <i className="bx bx-cart"></i>
-                    {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+                    {cartCount > 0 && <span className="cart__count-head">{cartCount}</span>}
                 </Buttons>
             </div>
 
