@@ -1,9 +1,19 @@
 .products {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.products__cards {
   display: grid;
+  margin-top: 4rem;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 300px);
   gap: 2rem;
-  width: 100%;
+}
+
+.products__filters {
+  height: 4rem;
 }
 
 .products__card {
