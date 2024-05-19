@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 
 import maLogo from '@/assets/ma.svg';
 
@@ -8,11 +8,12 @@ import Link from '../link/Link.tsx';
 import './header.css';
 
 interface HeaderProps {
+    cartCount: number;
     onLinkPage: (link: string) => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onLinkPage }) => {
-    const [linkState, setLinkState] = useState({
+export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage }) => {
+    const [linkState, setLinkState] = React.useState({
         about: true,
         products: false,
     });
@@ -64,6 +65,7 @@ export const Header: React.FC<HeaderProps> = ({ onLinkPage }) => {
             <div className="head__cart">
                 <Buttons className="head__cart--button">
                     <i className="bx bx-cart"></i>
+                    {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
                 </Buttons>
             </div>
 

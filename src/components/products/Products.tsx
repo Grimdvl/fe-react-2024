@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import type Product from '../../interfaces/Product.ts';
 import Buttons from '../button/Buttons.tsx';
@@ -7,7 +7,11 @@ import { getDefaultCards } from './defaultCards.ts';
 
 import './products.css';
 
-export const Products = () => {
+interface ProductsProps {
+    onAddToCart: () => void;
+}
+
+export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setLoading] = useState(true);
 
@@ -43,7 +47,7 @@ export const Products = () => {
                                 {product.price}
                                 <span>₴</span>
                             </p>
-                            <Buttons className="card__descr--button">
+                            <Buttons className="card__descr--button" onClick={onAddToCart}>
                                 <i className="bx bx-cart"></i>
                             </Buttons>
                         </div>
