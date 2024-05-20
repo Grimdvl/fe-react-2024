@@ -57,7 +57,13 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
                     <i className="bx bx-loader-alt"></i>
                 </div>
             )}
-            <div className="products__filters"></div>
+            <form className="filters__search">
+                <input className="filters__search-input" placeholder="Search..." type="search" id="search" name="search" />
+                <label className="filters__search-icon" htmlFor="search">
+                    <i className="bx bx-search"></i>
+                </label>
+            </form>
+            <form className="products__filters"></form>
             <div className="products__cards">
                 {products.map((product: Product) => (
                     <div key={product.id} className="products__card">
