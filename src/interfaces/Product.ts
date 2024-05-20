@@ -1,4 +1,4 @@
-import type { Category } from './Category.ts';
+import type Category from './Category.ts';
 
 interface Product {
     id: number;
@@ -11,4 +11,4 @@ interface Product {
     category: Category;
 }
 
-export type { Product };
+export default Product;
