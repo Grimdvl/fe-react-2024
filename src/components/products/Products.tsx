@@ -57,13 +57,28 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
                     <i className="bx bx-loader-alt"></i>
                 </div>
             )}
-            <form className="filters__search">
-                <input className="filters__search-input" placeholder="Search..." type="search" id="search" name="search" />
-                <label className="filters__search-icon" htmlFor="search">
-                    <i className="bx bx-search"></i>
-                </label>
+            <form className="products__filters">
+                <div className="products__filters-search">
+                    <input className="filters__search-input" placeholder="Search..." type="search" id="search" name="search" />
+                    <label className="filters__search-icon" htmlFor="search">
+                        <i className="bx bx-search"></i>
+                    </label>
+                </div>
+                <Buttons className="products__filters-electronics">Electronics</Buttons>
+                <Buttons className="products__filters-shoes">Shoes</Buttons>
+                <Buttons className="products__filters-clothes">Clothes</Buttons>
+                <div className="products__filters-sort">
+                    <label htmlFor="type">Sort by:</label>
+                    <select data-type="select" title="type" name="type" id="type">
+                        <option value="High" selected>
+                            Price (High - Low)
+                        </option>
+                        <option value="Low">Price (Low - High)</option>
+                        <option value="Newest">Newest</option>
+                        <option value="Oldest">Oldest</option>
+                    </select>
+                </div>
             </form>
-            <form className="products__filters"></form>
             <div className="products__cards">
                 {products.map((product: Product) => (
                     <div key={product.id} className="products__card">

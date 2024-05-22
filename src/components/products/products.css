@@ -13,10 +13,12 @@
 }
 
 .products__filters {
+  display: flex;
+  justify-content: space-around;
   height: 4rem;
 }
 
-.filters__search {
+.products__filters-search {
   position: relative;
   max-width: 27.5rem;
   height: 4rem;
