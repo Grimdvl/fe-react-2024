@@ -18,6 +18,28 @@
   height: 4rem;
 }
 
+.products__filters-electronics,
+.products__filters-shoes,
+.products__filters-clothes {
+  color: #656565;
+  background-color: #FFF;
+  line-height: 1.7rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  border-radius: 3rem;
+  border: .1rem solid #CCC;
+  padding: 0 1rem;
+  cursor: pointer;
+  transition: .5s ease background-color, .5s ease color;
+}
+
+.products__filters-electronics:hover,
+.products__filters-shoes:hover,
+.products__filters-clothes:hover {
+  background-color: #EF4934;
+  color: #FFF;
+}
+
 .products__filters-search {
   position: relative;
   max-width: 27.5rem;
@@ -50,9 +72,6 @@
   width: 100%;
   border: none;
   padding-left: 2rem;
-  font-size: 1.4rem;
-  font-weight: 400;
-  line-height: 1.7rem;
   background-color: #F1F1F1;
   color: #333;
   border-radius: 3rem;
