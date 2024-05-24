@@ -6,7 +6,7 @@
 
 .products__cards {
   display: grid;
-  margin-top: 4rem;
+  margin-top: 2rem;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 300px);
   gap: 2rem;
@@ -20,7 +20,9 @@
 
 .products__filters-electronics,
 .products__filters-shoes,
-.products__filters-clothes {
+.products__filters-clothes,
+.products__filters-sort select {
+  height: 100%;
   color: #656565;
   background-color: #FFF;
   line-height: 1.7rem;
@@ -30,7 +32,13 @@
   border: .1rem solid #CCC;
   padding: 0 1rem;
   cursor: pointer;
+  appearance: none;
   transition: .5s ease background-color, .5s ease color;
+}
+
+.products__filters-sort select {
+  border-radius: 3rem;
+  appearance: none;
 }
 
 .products__filters-electronics:hover,
@@ -40,9 +48,29 @@
   color: #FFF;
 }
 
+.products__filters-sort select:focus {
+  outline: none;
+}
+
+/* .products__filters-sort select option {
+  background-color: #EF4934;
+  color: #FFF;
+} */
+
+.products__filters-sort select option {
+  border-radius: 3rem;
+}
+
+.products__filters-sort label {
+  line-height: 1.7rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding-right: 1rem;
+}
+
 .products__filters-search {
   position: relative;
-  max-width: 27.5rem;
+  min-width: 27.5rem;
   height: 4rem;
   display: grid;
   grid-template-columns: 1fr auto;

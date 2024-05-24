@@ -68,8 +68,8 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
                 <Buttons className="products__filters-shoes">Shoes</Buttons>
                 <Buttons className="products__filters-clothes">Clothes</Buttons>
                 <div className="products__filters-sort">
-                    <label htmlFor="type">Sort by:</label>
-                    <select data-type="select" title="type" name="type" id="type">
+                    <label htmlFor="sort">Sort by:</label>
+                    <select data-type="select" title="type" name="sort" id="sort">
                         <option value="High" selected>
                             Price (High - Low)
                         </option>
