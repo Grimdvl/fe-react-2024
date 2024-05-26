@@ -52,13 +52,10 @@
   outline: none;
 }
 
-/* .products__filters-sort select option {
-  background-color: #EF4934;
-  color: #FFF;
-} */
-
 .products__filters-sort select option {
   border-radius: 3rem;
+  background-color: #EF4934;
+  color: #FFF;
 }
 
 .products__filters-sort label {

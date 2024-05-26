@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import type Product from '../../interfaces/Product.ts';
 import Buttons from '../button/Buttons.tsx';
 
 import { getDefaultCards } from './defaultCards.ts';
 
-import './products.css';
+import styles from './products.module.css';
 
 interface ProductsProps {
     onAddToCart: (newCartCount: number) => void;
@@ -51,23 +51,23 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
     };
 
     return (
-        <section className="products">
+        <section className={styles['products']}>
             {isLoading && (
-                <div className="products-loading">
+                <div className={styles['products-loading']}>
                     <i className="bx bx-loader-alt"></i>
                 </div>
             )}
-            <form className="products__filters">
-                <div className="products__filters-search">
-                    <input className="filters__search-input" placeholder="Search..." type="search" id="search" name="search" />
-                    <label className="filters__search-icon" htmlFor="search">
+            <form className={styles['products__filters']}>
+                <div className={styles['products__filters-search']}>
+                    <input className={styles['filters__search-input']} placeholder="Search..." type="search" id="search" name="search" />
+                    <label className={styles['filters__search-icon']} htmlFor="search">
                         <i className="bx bx-search"></i>
                     </label>
                 </div>
-                <Buttons className="products__filters-electronics">Electronics</Buttons>
-                <Buttons className="products__filters-shoes">Shoes</Buttons>
-                <Buttons className="products__filters-clothes">Clothes</Buttons>
-                <div className="products__filters-sort">
+                <Buttons className={styles['products__filters-electronics']}>Electronics</Buttons>
+                <Buttons className={styles['products__filters-shoes']}>Shoes</Buttons>
+                <Buttons className={styles['products__filters-clothes']}>Clothes</Buttons>
+                <div className={styles['products__filters-sort']}>
                     <label htmlFor="sort">Sort by:</label>
                     <select data-type="select" title="type" name="sort" id="sort">
                         <option value="High" selected>
@@ -79,20 +79,20 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
                     </select>
                 </div>
             </form>
-            <div className="products__cards">
+            <div className={styles['products__cards']}>
                 {products.map((product: Product) => (
-                    <div key={product.id} className="products__card">
-                        <img className="products__card-img" src={product.images[0]} alt={product.title} />
-                        <div className="products__card-info">
-                            <h3 className="card-title">{product.title}</h3>
-                            <div className="card__descr">
-                                <p className="card__descr-price">
+                    <div key={product.id} className={styles['products__card']}>
+                        <img className={styles['products__card-img']} src={product.images[0]} alt={product.title} />
+                        <div className={styles['products__card-info']}>
+                            <h3 className={styles['card-title']}>{product.title}</h3>
+                            <div className={styles['card__descr']}>
+                                <p className={styles['card__descr-price']}>
                                     {product.price}
                                     <span>₴</span>
                                 </p>
-                                <Buttons className="card__descr--button" onClick={() => handleAddToCart(product.id)}>
+                                <Buttons className={styles['card__descr--button']} onClick={() => handleAddToCart(product.id)}>
                                     <i className="bx bx-cart"></i>
-                                    {cartCounts[product.id] && <span className="cart__count">{cartCounts[product.id]}</span>}
+                                    {cartCounts[product.id] && <span className={styles['cart__count']}>{cartCounts[product.id]}</span>}
                                 </Buttons>
                             </div>
                         </div>

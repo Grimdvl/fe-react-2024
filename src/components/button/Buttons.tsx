@@ -1,11 +1,12 @@
-interface ButtonProps {
-    className: string;
-    onClick?: () => void;
-    children: React.ReactNode;
+import React from 'react';
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    className?: string;
+    active?: boolean;
 }
 
-const Buttons: React.FC<ButtonProps> = ({ className, onClick, children }) => (
-    <button className={className} onClick={onClick}>
+const Buttons: React.FC<ButtonProps> = ({ children, className, active, ...props }) => (
+    <button className={`${className} ${active ? 'active' : ''}`} {...props}>
         {children}
     </button>
 );
