@@ -39,3 +39,19 @@
   text-decoration: underline;
   color: #111;
 }
+
+@media (max-width: 991px) {
+
+  .about {
+    flex-direction: column-reverse;
+  }
+
+  .about__descr {
+    width: 70vw;
+    margin-top: 2rem;
+  }
+
+  .about__logo-img {
+    width: 70vw;
+  }
+}

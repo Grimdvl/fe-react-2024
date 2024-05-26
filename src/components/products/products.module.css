@@ -6,108 +6,10 @@
 
 .products__cards {
   display: grid;
-  margin-top: 2rem;
+  margin-top: 6rem;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 300px);
   gap: 2rem;
-}
-
-.products__filters {
-  display: flex;
-  justify-content: space-around;
-  height: 4rem;
-}
-
-.products__filters-electronics,
-.products__filters-shoes,
-.products__filters-clothes,
-.products__filters-sort select {
-  height: 100%;
-  color: #656565;
-  background-color: #FFF;
-  line-height: 1.7rem;
-  font-size: 1.4rem;
-  font-weight: 400;
-  border-radius: 3rem;
-  border: .1rem solid #CCC;
-  padding: 0 1rem;
-  cursor: pointer;
-  appearance: none;
-  transition: .5s ease background-color, .5s ease color;
-}
-
-.products__filters-sort select {
-  border-radius: 3rem;
-  appearance: none;
-}
-
-.products__filters-electronics:hover,
-.products__filters-shoes:hover,
-.products__filters-clothes:hover {
-  background-color: #EF4934;
-  color: #FFF;
-}
-
-.products__filters-sort select:focus {
-  outline: none;
-}
-
-.products__filters-sort select option {
-  border-radius: 3rem;
-  background-color: #EF4934;
-  color: #FFF;
-}
-
-.products__filters-sort label {
-  line-height: 1.7rem;
-  font-size: 1.4rem;
-  font-weight: 600;
-  padding-right: 1rem;
-}
-
-.products__filters-search {
-  position: relative;
-  min-width: 27.5rem;
-  height: 4rem;
-  display: grid;
-  grid-template-columns: 1fr auto;
-}
-
-.filters__search-icon {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 2rem;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #EF4934;
-  color: #FFF;
-  border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
-  transition: .5s ease background-color;
-}
-
-.filters__search-input {
-  height: 100%;
-  width: 100%;
-  border: none;
-  padding-left: 2rem;
-  background-color: #F1F1F1;
-  color: #333;
-  border-radius: 3rem;
-}
-
-.filters__search-icon:hover {
-  background-color: #D43824;
-}
-
-.filters__search input:focus {
-  outline: none;
 }
 
 .products__card {
@@ -179,4 +81,18 @@
 
 @keyframes loading {
   100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 991px) {
+
+  .products__cards {
+    margin-top: 12rem;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .products__cards {
+    margin-top: 18rem;
+  }
 }
