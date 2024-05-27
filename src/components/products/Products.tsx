@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import type Product from '../../interfaces/Product';
-import Buttons from '../button/Buttons';
-import Pagination from '../pagination/Pagination';
+import type { Product } from '../../interfaces/Product.tsx';
+import Buttons from '../button/Buttons.tsx';
+import Pagination from '../pagination/Pagination.tsx';
 
-import { getDefaultCards } from './defaultCards';
+import { getDefaultCards } from './defaultCards.tsx';
 
 import styles from './products.module.css';
 
