@@ -183,7 +183,7 @@ header {
 }
 
 .head_filters {
-  background-color: #FFF;
+  background-color: var(--background-color);
   padding: 2rem 12%;
 }
 
@@ -209,8 +209,8 @@ header {
 .filters--clothes,
 .products__filters-sort select {
   height: 100%;
-  color: #656565;
-  background-color: #FFF;
+  color: var(--text-color);
+  background-color: var(--background-color);
   line-height: 1.7rem;
   font-size: 1.4rem;
   font-weight: 400;
@@ -229,7 +229,7 @@ header {
 .filters--shoes:hover,
 .filters--clothes:hover {
   background-color: #EF4934;
-  color: #FFF;
+  color: var(--second-text-color);
 }
 
 .products__filters-sort select:focus {
@@ -254,7 +254,7 @@ header {
 .filters__search-icon {
   position: absolute;
   top: 50%;
-  right: 0;
+  right: .05rem;
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 2rem;
@@ -263,10 +263,10 @@ header {
   justify-content: center;
   align-items: center;
   background-color: #EF4934;
-  color: #FFF;
+  color: var(--second-text-color);
   border-radius: 50%;
   width: 4rem;
-  height: 4rem;
+  height: 3.9rem;
   transition: .5s ease background-color;
 }
 
@@ -276,9 +276,10 @@ header {
   border: none;
   padding-left: 2rem;
   padding-right: 4rem;
-  background-color: #F1F1F1;
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--text-color);
   border-radius: 3rem;
+  border: .1rem solid #CCC;
 }
 
 .filters__search-icon:hover {

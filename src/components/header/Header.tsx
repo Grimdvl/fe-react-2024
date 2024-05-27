@@ -55,10 +55,16 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage }) => {
                 </div>
 
                 <div className={styles['head__theme']}>
-                    <Buttons onClick={handleThemeToggle} className={styles['head__theme--sun']} active={theme === 'light'}>
+                    <Buttons
+                        onClick={handleThemeToggle}
+                        className={`${styles['head__theme--sun']} ${theme === 'light' ? styles['active'] : ''}`}
+                    >
                         <i className="bx bx-sun"></i>
                     </Buttons>
-                    <Buttons onClick={handleThemeToggle} className={styles['head__theme--moon']} active={theme === 'dark'}>
+                    <Buttons
+                        onClick={handleThemeToggle}
+                        className={`${styles['head__theme--moon']} ${theme === 'dark' ? styles['active'] : ''}`}
+                    >
                         <i className="bx bx-moon"></i>
                     </Buttons>
                 </div>

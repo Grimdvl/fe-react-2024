@@ -12,11 +12,13 @@
 .dark {
   --background-color: #111;
   --text-color: #FFF;
+  --second-text-color: #111;
 }
 
 .light {
   --background-color: #FFF;
   --text-color: #111;
+  --second-text-color: #FFF;
 }
 
 html {

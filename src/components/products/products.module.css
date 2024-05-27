@@ -64,6 +64,7 @@
   background-color: transparent;
   cursor: pointer;
   position: relative;
+  color: var(--text-color);
 }
 
 .products-loading {
