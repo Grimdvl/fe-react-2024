@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import type Product from '../../interfaces/Product.ts';
-import Buttons from '../button/Buttons.tsx';
+import type Product from '../../interfaces/Product';
+import Buttons from '../button/Buttons';
+import Pagination from '../pagination/Pagination';
 
-import { getDefaultCards } from './defaultCards.ts';
+import { getDefaultCards } from './defaultCards';
 
 import styles from './products.module.css';
 
@@ -15,6 +16,8 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setLoading] = useState(true);
     const [cartCounts, setCartCounts] = useState<{ [key: number]: number }>({});
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 8;
 
     useEffect(() => {
         fetch('http://localhost:3000/cards')
@@ -50,6 +53,14 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
         localStorage.setItem(`cartCount_${productId}`, newCartCount.toString());
     };
 
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
     return (
         <section className={styles['products']}>
             {isLoading && (
@@ -58,7 +69,7 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
                 </div>
             )}
             <div className={styles['products__cards']}>
-                {products.map((product: Product) => (
+                {currentProducts.map((product: Product) => (
                     <div key={product.id} className={styles['products__card']}>
                         <img className={styles['products__card-img']} src={product.images[0]} alt={product.title} />
                         <div className={styles['products__card-info']}>
@@ -77,6 +88,11 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
                     </div>
                 ))}
             </div>
+            <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(products.length / productsPerPage)}
+                onPageChange={handlePageChange}
+            />
         </section>
     );
 };
