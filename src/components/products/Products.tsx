@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import type { Product } from '../../interfaces/Product.tsx';
+import type Product from '../../interfaces/Product';
 import Buttons from '../button/Buttons.tsx';
 import Pagination from '../pagination/Pagination.tsx';
 

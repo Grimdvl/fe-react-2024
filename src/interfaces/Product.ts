@@ -1,6 +1,6 @@
 import type Category from './Category.ts';
 
-export interface Product {
+interface Product {
     id: number;
     title: string;
     price: number;
