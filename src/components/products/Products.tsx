@@ -4,7 +4,7 @@ import type Product from '../../interfaces/Product';
 import Buttons from '../button/Buttons.tsx';
 import Pagination from '../pagination/Pagination.tsx';
 
-import { getDefaultCards } from './defaultCards.tsx';
+import { getDefaultCards } from './defaultCards.ts';
 
 import styles from './products.module.css';
 
