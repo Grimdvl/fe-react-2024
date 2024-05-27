@@ -3,8 +3,8 @@ footer {
   display: flex;
   justify-content: center;
   min-height: 14rem;
-  background-color: #FFF;
-  color: #111;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .foot {
@@ -50,7 +50,7 @@ footer::before {
   text-align: center;
   background-color: #EF4934;
   font-size: 3rem;
-  color: #FFF;
+  color: var(--second-text-color);
   transition: .5s ease background-color;
 }
 
