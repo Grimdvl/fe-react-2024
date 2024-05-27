@@ -9,14 +9,14 @@
   outline: none;
 }
 
-.dark-theme {
-  --background-color: #000;
+.dark {
+  --background-color: #111;
   --text-color: #FFF;
 }
 
-.light-theme {
+.light {
   --background-color: #FFF;
-  --text-color: #000;
+  --text-color: #111;
 }
 
 html {

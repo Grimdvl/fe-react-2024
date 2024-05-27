@@ -1,5 +1,5 @@
 import type { MouseEvent } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import maLogo from '@/assets/ma.svg';
 
@@ -18,6 +18,22 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage }) => {
         about: true,
         products: false,
     });
+
+    const [theme, setTheme] = useState('light');
+
+    useEffect(() => {
+        const userPreferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const savedTheme = localStorage.getItem('theme') || userPreferredTheme;
+        setTheme(savedTheme);
+        document.documentElement.className = savedTheme;
+    }, []);
+
+    const handleThemeToggle = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+        document.documentElement.className = newTheme;
+    };
 
     const handleLinkClick = (link: string, event: MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
@@ -39,10 +55,10 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage }) => {
                 </div>
 
                 <div className={styles['head__theme']}>
-                    <Buttons className={styles['head__theme--sun']} active={true}>
+                    <Buttons onClick={handleThemeToggle} className={styles['head__theme--sun']} active={theme === 'light'}>
                         <i className="bx bx-sun"></i>
                     </Buttons>
-                    <Buttons className={styles['head__theme--moon']}>
+                    <Buttons onClick={handleThemeToggle} className={styles['head__theme--moon']} active={theme === 'dark'}>
                         <i className="bx bx-moon"></i>
                     </Buttons>
                 </div>
