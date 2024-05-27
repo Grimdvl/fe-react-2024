@@ -94,8 +94,6 @@ header {
   transform: rotate(-30deg);
 }
 
-
-.cart__count,
 .cart__count-head {
   font-size: 1rem;
   display: flex;

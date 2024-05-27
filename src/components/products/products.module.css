@@ -84,6 +84,22 @@
   100% { transform: rotate(360deg); }
 }
 
+.cart__count {
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: -.5rem;
+  border-radius: 50%;
+  background-color: #EF4934;
+  color: #111;
+}
+
 @media (max-width: 991px) {
 
   .products__cards {
