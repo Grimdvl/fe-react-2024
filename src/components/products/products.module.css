@@ -81,7 +81,10 @@
 }
 
 @keyframes loading {
-  100% { transform: rotate(360deg); }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .cart__count {
@@ -107,7 +110,7 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
 
   .products__cards {
     margin-top: 18rem;

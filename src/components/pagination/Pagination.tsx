@@ -10,7 +10,6 @@ interface PaginationProps {
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
     const ELLIPSIS = '...';
-    const ACTIVE_CLASS = styles['active'];
     const BUTTON_CLASS = styles['pagination--button'];
 
     const generatePageNumbers = () => {
@@ -41,7 +40,8 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
                     key={index}
                     onClick={() => typeof number === 'number' && onPageChange(number)}
                     disabled={number === currentPage || number === ELLIPSIS}
-                    className={`${BUTTON_CLASS} ${number === currentPage ? ACTIVE_CLASS : ''}`}
+                    className={BUTTON_CLASS}
+                    active={number === currentPage}
                 >
                     {number}
                 </Buttons>

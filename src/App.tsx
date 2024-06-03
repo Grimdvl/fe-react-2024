@@ -14,6 +14,11 @@ function App() {
     });
 
     const [cartCount, setCartCount] = useState<number>(0);
+    const [filters, setFilters] = useState<{ search: string; category: string; sort: string }>({
+        search: '',
+        category: '',
+        sort: 'highestPrice',
+    });
 
     useEffect(() => {
         const savedCartCount = localStorage.getItem('cartCount');
@@ -30,18 +35,21 @@ function App() {
         });
     };
 
-    const handleAddToCart = () => {
-        const newCartCount = cartCount + 1;
+    const handleAddToCart = (newCartCount: number) => {
         setCartCount(newCartCount);
         localStorage.setItem('cartCount', newCartCount.toString());
+    };
+
+    const handleFiltersChange = (newFilters: { search: string; category: string; sort: string }) => {
+        setFilters(newFilters);
     };
 
     return (
         <>
             <header>
-                <Header cartCount={cartCount} onLinkPage={onLinkPage} />
+                <Header cartCount={cartCount} onLinkPage={onLinkPage} onFiltersChange={handleFiltersChange} />
             </header>
-            <main>{linkState.about ? <About /> : <Products onAddToCart={handleAddToCart} />}</main>
+            <main>{linkState.about ? <About /> : <Products onAddToCart={handleAddToCart} filters={filters} />}</main>
             <footer>
                 <Footer />
             </footer>

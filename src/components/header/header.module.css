@@ -9,13 +9,19 @@ header {
 
 .head_container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   height: 8rem;
   background-color: #111;
   color: #FFF;
-  padding: 0 12%;
+  padding: 0 17%;
+}
+
+.head__wrapper-first,
+.head__wrapper-second {
+  display: flex;
+  justify-content: space-around;
 }
 
 .head__theme,
@@ -30,6 +36,7 @@ header {
 .head__theme {
   position: relative;
   width: 8rem;
+  margin-left: 4rem;
 }
 
 .head__theme--sun, .head__theme--moon {
@@ -62,6 +69,7 @@ header {
 
 .head__navigation {
   width: 17.5rem;
+  margin-right: 8rem;
 }
 
 .head__navigation--link {
@@ -73,7 +81,6 @@ header {
   transition: .5s ease font-weight;
   cursor: pointer;
 }
-
 
 .head__navigation--link.active,
 .head__navigation--link:hover {
@@ -88,6 +95,7 @@ header {
   font-size: 2.4rem;
   z-index: 1;
   transition: .5s ease transform;
+  margin-right: 4rem;
 }
 
 .head__cart--button:hover {
@@ -202,6 +210,10 @@ header {
   height: 4rem;
 }
 
+.products__filters-staff {
+  justify-content: flex-end;
+}
+
 .filters--electronics,
 .filters--shoes,
 .filters--clothes,
@@ -216,18 +228,22 @@ header {
   border: .1rem solid #CCC;
   padding: 0 1rem;
   cursor: pointer;
-  transition: .5s ease background-color, .5s ease color;
+  transition: .5s ease background-color, .5s ease color, .5s ease border-color;
 }
 
 .products__filters-staff {
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .filters--electronics:hover,
+.filters--electronics.active,
 .filters--shoes:hover,
-.filters--clothes:hover {
+.filters--shoes.active,
+.filters--clothes:hover,
+.filters--clothes.active {
   background-color: #EF4934;
-  color: var(--second-text-color);
+  color: #FFF;
+  border-color: #EF4934;
 }
 
 .products__filters-sort select:focus {
@@ -244,7 +260,7 @@ header {
 .products__filters-search {
   position: relative;
   width: 100%;
-  max-width: 30rem;
+  max-width: 27rem;
   height: 4rem;
   margin: 0 auto;
 }
@@ -252,7 +268,7 @@ header {
 .filters__search-icon {
   position: absolute;
   top: 50%;
-  right: .05rem;
+  right: 0;
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 2rem;
@@ -261,10 +277,10 @@ header {
   justify-content: center;
   align-items: center;
   background-color: #EF4934;
-  color: var(--second-text-color);
+  color: #FFF;
   border-radius: 50%;
   width: 4rem;
-  height: 3.9rem;
+  height: 4rem;
   transition: .5s ease background-color;
 }
 
@@ -305,10 +321,14 @@ header {
 
   .head_container,
   .head_filters {
-    padding: 2rem 5%;
+    padding: 2rem 17%;
   }
 
   .head--humburger {
     display: block;
+  }
+
+  .products__filters-staff {
+    justify-content: center;
   }
 }

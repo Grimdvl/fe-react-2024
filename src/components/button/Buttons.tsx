@@ -1,4 +1,4 @@
-import React from 'react';
+import styles from './buttons.module.css';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string;
@@ -6,7 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Buttons: React.FC<ButtonProps> = ({ children, className, active, ...props }) => (
-    <button className={`${className} ${active ? 'active' : ''}`} {...props}>
+    <button className={`${className} ${active ? styles['active'] : ''}`} {...props}>
         {children}
     </button>
 );
