@@ -103,14 +103,14 @@
   color: #111;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1200px) {
 
   .products__cards {
     margin-top: 12rem;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
 
   .products__cards {
     margin-top: 18rem;

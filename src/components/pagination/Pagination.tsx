@@ -1,4 +1,4 @@
-import Buttons from '../button/Buttons';
+import Button from '../button/Button';
 
 import styles from './pagination.module.css';
 
@@ -32,11 +32,11 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 
     return (
         <div className={styles['pagination']}>
-            <Buttons onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1} className={BUTTON_CLASS}>
+            <Button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1} className={BUTTON_CLASS}>
                 <i className="bx bx-chevron-left"></i>
-            </Buttons>
+            </Button>
             {pageNumbers.map((number, index) => (
-                <Buttons
+                <Button
                     key={index}
                     onClick={() => typeof number === 'number' && onPageChange(number)}
                     disabled={number === currentPage || number === ELLIPSIS}
@@ -44,11 +44,11 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
                     active={number === currentPage}
                 >
                     {number}
-                </Buttons>
+                </Button>
             ))}
-            <Buttons onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages} className={BUTTON_CLASS}>
+            <Button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages} className={BUTTON_CLASS}>
                 <i className="bx bx-chevron-right"></i>
-            </Buttons>
+            </Button>
         </div>
     );
 };

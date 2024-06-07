@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import maLogo from '@/assets/ma.svg';
 
-import Buttons from '../button/Buttons.tsx';
+import Button from '../button/Button.tsx';
 import Link from '../link/Link.tsx';
 
 import styles from './header.module.css';
@@ -72,18 +72,18 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
                     </div>
 
                     <div className={styles['head__theme']}>
-                        <Buttons
+                        <Button
                             onClick={handleThemeToggle}
                             className={`${styles['head__theme--sun']} ${theme === 'light' ? styles['active'] : ''}`}
                         >
                             <i className="bx bx-sun"></i>
-                        </Buttons>
-                        <Buttons
+                        </Button>
+                        <Button
                             onClick={handleThemeToggle}
                             className={`${styles['head__theme--moon']} ${theme === 'dark' ? styles['active'] : ''}`}
                         >
                             <i className="bx bx-moon"></i>
-                        </Buttons>
+                        </Button>
                     </div>
                 </div>
 
@@ -106,21 +106,21 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
                     </div>
 
                     <div className={styles['head__cart']}>
-                        <Buttons className={styles['head__cart--button']}>
+                        <Button className={styles['head__cart--button']}>
                             <i className="bx bx-cart"></i>
                             {cartCount > 0 && <span className={styles['cart__count-head']}>{cartCount}</span>}
-                        </Buttons>
+                        </Button>
                     </div>
 
                     <div className={styles['head__registration']}>
-                        <Buttons className={styles['head__registration--log']}>
+                        <Button className={styles['head__registration--log']}>
                             <i className="bx bx-log-in"></i>
                             Login
-                        </Buttons>
-                        <Buttons className={styles['head__registration--sign']}>
+                        </Button>
+                        <Button className={styles['head__registration--sign']}>
                             <i className="bx bx-user-plus"></i>
                             Sign up
-                        </Buttons>
+                        </Button>
                     </div>
 
                     <div className={styles['head--humburger']}></div>
@@ -145,24 +145,24 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
                             </label>
                         </div>
                         <div className={styles['products__filters-staff']}>
-                            <Buttons
+                            <Button
                                 className={`${styles['filters--electronics']} ${filters.category === 'Electronics' ? styles['active'] : ''}`}
                                 onClick={(event) => handleCategoryClick('Electronics', event)}
                             >
                                 Electronics
-                            </Buttons>
-                            <Buttons
+                            </Button>
+                            <Button
                                 className={`${styles['filters--shoes']} ${filters.category === 'Shoes' ? styles['active'] : ''}`}
                                 onClick={(event) => handleCategoryClick('Shoes', event)}
                             >
                                 Shoes
-                            </Buttons>
-                            <Buttons
+                            </Button>
+                            <Button
                                 className={`${styles['filters--clothes']} ${filters.category === 'Clothes' ? styles['active'] : ''}`}
                                 onClick={(event) => handleCategoryClick('Clothes', event)}
                             >
                                 Clothes
-                            </Buttons>
+                            </Button>
                         </div>
                         <div className={styles['products__filters-sort']}>
                             <label htmlFor="sort">Sort by:</label>

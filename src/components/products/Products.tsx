@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import type Product from '../../interfaces/Product';
-import Buttons from '../button/Buttons.tsx';
+import Button from '../button/Button.tsx';
 import Pagination from '../pagination/Pagination.tsx';
 
 import { getDefaultCards } from './defaultCards.ts';
@@ -122,10 +122,10 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
                                         {product.price}
                                         <span>₴</span>
                                     </p>
-                                    <Buttons className={styles['card__descr--button']} onClick={() => handleAddToCart(product.id)}>
+                                    <Button className={styles['card__descr--button']} onClick={() => handleAddToCart(product.id)}>
                                         <i className="bx bx-cart"></i>
                                         {cartCounts[product.id] && <span className={styles['cart__count']}>{cartCounts[product.id]}</span>}
-                                    </Buttons>
+                                    </Button>
                                 </div>
                             </div>
                         </div>
