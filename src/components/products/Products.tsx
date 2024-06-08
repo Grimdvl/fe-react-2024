@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import type Product from '../../interfaces/Product.ts';
-import Buttons from '../button/Buttons.tsx';
+import type Product from '../../interfaces/Product';
+import Button from '../button/Button.tsx';
+import Pagination from '../pagination/Pagination.tsx';
 
 import { getDefaultCards } from './defaultCards.ts';
 
@@ -9,14 +10,18 @@ import styles from './products.module.css';
 
 interface ProductsProps {
     onAddToCart: (newCartCount: number) => void;
+    filters: { search: string; category: string; sort: string };
 }
 
-export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
+export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setLoading] = useState(true);
     const [cartCounts, setCartCounts] = useState<{ [key: number]: number }>({});
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 8;
 
     useEffect(() => {
+        setLoading(true);
         fetch('http://localhost:3000/cards')
             .then((response) => response.json())
             .then((data) => {
@@ -50,33 +55,92 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart }) => {
         localStorage.setItem(`cartCount_${productId}`, newCartCount.toString());
     };
 
-    return (
-        <section className={styles['products']}>
-            {isLoading && (
-                <div className={styles['products-loading']}>
-                    <i className="bx bx-loader-alt"></i>
-                </div>
-            )}
-            <div className={styles['products__cards']}>
-                {products.map((product: Product) => (
-                    <div key={product.id} className={styles['products__card']}>
-                        <img className={styles['products__card-img']} src={product.images[0]} alt={product.title} />
-                        <div className={styles['products__card-info']}>
-                            <h3 className={styles['card-title']}>{product.title}</h3>
-                            <div className={styles['card__descr']}>
-                                <p className={styles['card__descr-price']}>
-                                    {product.price}
-                                    <span>₴</span>
-                                </p>
-                                <Buttons className={styles['card__descr--button']} onClick={() => handleAddToCart(product.id)}>
-                                    <i className="bx bx-cart"></i>
-                                    {cartCounts[product.id] && <span className={styles['cart__count']}>{cartCounts[product.id]}</span>}
-                                </Buttons>
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    const applyFilters = (productList: Product[]) => {
+        let filteredProducts = productList;
+
+        if (filters.search) {
+            filteredProducts = filteredProducts.filter((product) => product.title.toLowerCase().includes(filters.search.toLowerCase()));
+        }
+
+        if (filters.category) {
+            filteredProducts = filteredProducts.filter((product) => product.category.name === filters.category);
+        }
+
+        if (filters.sort) {
+            switch (filters.sort) {
+                case 'highestPrice': {
+                    filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                }
+                case 'lowestPrice': {
+                    filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                }
+                case 'newest': {
+                    filteredProducts = filteredProducts.sort((a, b) => b.id - a.id);
+                    break;
+                }
+                case 'oldest': {
+                    filteredProducts = filteredProducts.sort((a, b) => a.id - b.id);
+                    break;
+                }
+            }
+        }
+
+        return filteredProducts;
+    };
+
+    const filteredProducts = applyFilters(products);
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    let content;
+    if (isLoading) {
+        content = (
+            <div className={styles['products-loading']}>
+                <i className="bx bx-loader-alt"></i>
+            </div>
+        );
+    } else if (currentProducts.length === 0) {
+        content = <div className={styles['products-loading']}>No products found.</div>;
+    } else {
+        content = (
+            <>
+                <div className={styles['products__cards']}>
+                    {currentProducts.map((product: Product) => (
+                        <div key={product.id} className={styles['products__card']}>
+                            <img className={styles['products__card-img']} src={product.images[0]} alt={product.title} />
+                            <div className={styles['products__card-info']}>
+                                <h3 className={styles['card-title']}>{product.title}</h3>
+                                <div className={styles['card__descr']}>
+                                    <p className={styles['card__descr-price']}>
+                                        {product.price}
+                                        <span>₴</span>
+                                    </p>
+                                    <Button className={styles['card__descr--button']} onClick={() => handleAddToCart(product.id)}>
+                                        <i className="bx bx-cart"></i>
+                                        {cartCounts[product.id] && <span className={styles['cart__count']}>{cartCounts[product.id]}</span>}
+                                    </Button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
-            </div>
-        </section>
-    );
+                    ))}
+                </div>
+                {filteredProducts.length > productsPerPage && (
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={Math.ceil(filteredProducts.length / productsPerPage)}
+                        onPageChange={handlePageChange}
+                    />
+                )}
+            </>
+        );
+    }
+
+    return <section className={styles['products']}>{content}</section>;
 };

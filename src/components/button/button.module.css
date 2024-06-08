@@ -1,0 +1,4 @@
+.active {
+  background-color: #EF4934;
+  color: var(--second-text-color);
+}

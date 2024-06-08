@@ -81,7 +81,10 @@
 }
 
 @keyframes loading {
-  100% { transform: rotate(360deg); }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .cart__count {
@@ -100,14 +103,14 @@
   color: #111;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1200px) {
 
   .products__cards {
     margin-top: 12rem;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 991px) {
 
   .products__cards {
     margin-top: 18rem;
