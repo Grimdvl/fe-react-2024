@@ -37,13 +37,12 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
         document.documentElement.className = newTheme;
     };
 
-    const handleLinkClick = (link: string, event: MouseEvent<HTMLAnchorElement>) => {
-        event.preventDefault();
-        setLinkState({
-            ...linkState,
+    const handleLinkClick = (link: string) => {
+        setLinkState((previousState) => ({
+            ...previousState,
             [link]: true,
             [link === 'about' ? 'products' : 'about']: false,
-        });
+        }));
         onLinkPage(link);
     };
 
@@ -90,16 +89,16 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
                 <div className={styles['head__wrapper-second']}>
                     <div className={styles['head__navigation']}>
                         <Link
-                            to="#"
+                            to="/fe-react-2024"
                             className={`${styles['head__navigation--link']} ${linkState.about ? styles['active'] : ''}`}
-                            onClick={(event) => handleLinkClick('about', event)}
+                            onClick={(event) => handleLinkClick('about')}
                         >
                             About
                         </Link>
                         <Link
-                            to="#"
+                            to="/products"
                             className={`${styles['head__navigation--link']} ${linkState.products ? styles['active'] : ''}`}
-                            onClick={(event) => handleLinkClick('products', event)}
+                            onClick={(event) => handleLinkClick('products')}
                         >
                             Products
                         </Link>
