@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import type Product from '../../interfaces/Product';
-import Button from '../button/Button.tsx';
-import Pagination from '../pagination/Pagination.tsx';
+import Button from '../button/Button';
+import Pagination from '../pagination/Pagination';
 
-import { getDefaultCards } from './defaultCards.ts';
+import { getDefaultCards } from './defaultCards';
 
 import styles from './products.module.css';
 
@@ -19,6 +20,7 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
     const [cartCounts, setCartCounts] = useState<{ [key: number]: number }>({});
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 8;
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -57,6 +59,10 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
+    };
+
+    const handleProductClick = (productId: number) => {
+        navigate(`/products/${productId}`);
     };
 
     const applyFilters = (productList: Product[]) => {
@@ -113,7 +119,7 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
             <>
                 <div className={styles['products__cards']}>
                     {currentProducts.map((product: Product) => (
-                        <div key={product.id} className={styles['products__card']}>
+                        <div key={product.id} className={styles['products__card']} onClick={() => handleProductClick(product.id)}>
                             <img className={styles['products__card-img']} src={product.images[0]} alt={product.title} />
                             <div className={styles['products__card-info']}>
                                 <h3 className={styles['card-title']}>{product.title}</h3>

@@ -66,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
             <div className={styles['head_container']}>
                 <div className={styles['head__wrapper-first']}>
                     <div className={styles['head__logo']}>
-                        <Link href="https://www.mastersacademy.education/" className={styles['head__logo-ma']}>
+                        <Link to="https://www.mastersacademy.education/" className={styles['head__logo-ma']}>
                             <img src={maLogo} alt="Masters Academy logo" className={styles['head__logo-ma--link']} />
                         </Link>
                     </div>
@@ -90,14 +90,14 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
                 <div className={styles['head__wrapper-second']}>
                     <div className={styles['head__navigation']}>
                         <Link
-                            href="#"
+                            to="#"
                             className={`${styles['head__navigation--link']} ${linkState.about ? styles['active'] : ''}`}
                             onClick={(event) => handleLinkClick('about', event)}
                         >
                             About
                         </Link>
                         <Link
-                            href="#"
+                            to="#"
                             className={`${styles['head__navigation--link']} ${linkState.products ? styles['active'] : ''}`}
                             onClick={(event) => handleLinkClick('products', event)}
                         >
