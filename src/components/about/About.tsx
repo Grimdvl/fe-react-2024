@@ -16,7 +16,7 @@ export const About = () => (
             </p>
             <p className={aboutDescrTextClass}>
                 This page was developed during the course{' '}
-                <Link href="https://www.mastersacademy.education/frontend-react-it" className="intro">
+                <Link to="https://www.mastersacademy.education/frontend-react-it" className="intro">
                     &apos;Intro to React&apos;
                 </Link>{' '}
                 from Masters Academy in 2024.
@@ -27,11 +27,11 @@ export const About = () => (
             </p>
             <p className={aboutDescrTextClass}>
                 You can contact me via{' '}
-                <Link href="https://t.me/Grim_679" className="link">
+                <Link to="https://t.me/Grim_679" className="link">
                     telegram
                 </Link>{' '}
                 and check out my{' '}
-                <Link href="https://github.com/Grimdvl" className="link">
+                <Link to="https://github.com/Grimdvl" className="link">
                     GitHub
                 </Link>
                 .
