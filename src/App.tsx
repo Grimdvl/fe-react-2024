@@ -43,8 +43,8 @@ function App() {
             </header>
             <LayoutComponent>
                 <Routes>
-                    <Route path="/fe-react-2024" element={<About />} />
-                    <Route path="/products" element={<Products onAddToCart={handleAddToCart} filters={filters} />} />
+                    <Route path="/fe-react-2024/" element={<About />} index />
+                    <Route path="/fe-react-2024/products" element={<Products onAddToCart={handleAddToCart} filters={filters} />} />
                     <Route path="/404" element={<PageNotFound />} />
                     <Route path="*" element={<Navigate to="/404" />} />
                 </Routes>

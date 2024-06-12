@@ -1,5 +1,6 @@
 import type { ChangeEvent, MouseEvent } from 'react';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import maLogo from '@/assets/ma.svg';
 
@@ -15,6 +16,8 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFiltersChange }) => {
+    const location = useLocation();
+
     const [linkState, setLinkState] = useState({
         about: true,
         products: false,
@@ -30,6 +33,15 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
         document.documentElement.className = savedTheme;
     }, []);
 
+    useEffect(() => {
+        const path = location.pathname;
+        if (path.includes('/products')) {
+            setLinkState({ about: false, products: true });
+        } else {
+            setLinkState({ about: true, products: false });
+        }
+    }, [location]);
+
     const handleThemeToggle = () => {
         const newTheme = theme === 'light' ? 'dark' : 'light';
         setTheme(newTheme);
@@ -38,11 +50,10 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
     };
 
     const handleLinkClick = (link: string) => {
-        setLinkState((previousState) => ({
-            ...previousState,
-            [link]: true,
-            [link === 'about' ? 'products' : 'about']: false,
-        }));
+        setLinkState({
+            about: link === 'about',
+            products: link === 'products',
+        });
         onLinkPage(link);
     };
 
@@ -89,16 +100,16 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
                 <div className={styles['head__wrapper-second']}>
                     <div className={styles['head__navigation']}>
                         <Link
-                            to="/fe-react-2024"
+                            to="/fe-react-2024/"
                             className={`${styles['head__navigation--link']} ${linkState.about ? styles['active'] : ''}`}
-                            onClick={(event) => handleLinkClick('about')}
+                            onClick={() => handleLinkClick('about')}
                         >
                             About
                         </Link>
                         <Link
-                            to="/products"
+                            to="/fe-react-2024/products"
                             className={`${styles['head__navigation--link']} ${linkState.products ? styles['active'] : ''}`}
-                            onClick={(event) => handleLinkClick('products')}
+                            onClick={() => handleLinkClick('products')}
                         >
                             Products
                         </Link>

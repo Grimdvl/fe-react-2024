@@ -31,7 +31,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
     const pageNumbers = generatePageNumbers();
 
     return (
-        <div className={styles['pagination']}>
+        <div className={styles.pagination}>
             <Button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1} className={BUTTON_CLASS}>
                 <i className="bx bx-chevron-left"></i>
             </Button>
