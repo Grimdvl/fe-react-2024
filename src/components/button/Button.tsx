@@ -6,7 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: React.FC<ButtonProps> = ({ children, className, active, ...props }) => (
-    <button className={`${styles.button} ${className} ${active ? styles['active'] : ''}`} {...props}>
+    <button className={`${className} ${active ? styles.active : ''}`} {...props}>
         {children}
     </button>
 );

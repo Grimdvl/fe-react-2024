@@ -1,5 +1,3 @@
-import React from 'react';
-
 const PageNotFound: React.FC = () => (
     <div>
         <h2>Page Not Found</h2>
