@@ -5,7 +5,7 @@ import type Product from '../../interfaces/Product';
 import Button from '../button/Button';
 import Pagination from '../pagination/Pagination';
 
-import { getDefaultCards } from './defaultCards';
+import { fetchData } from './dataFetcher';
 
 import styles from './products.module.css';
 
@@ -24,18 +24,10 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:3000/cards')
-            .then((response) => response.json())
-            .then((data) => {
-                setProducts(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-                const defaultCards = getDefaultCards();
-                setProducts(defaultCards);
-                setLoading(false);
-            });
+        fetchData('http://localhost:3000/cards').then((data) => {
+            setProducts(data);
+            setLoading(false);
+        });
     }, []);
 
     useEffect(() => {
@@ -62,7 +54,7 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
     };
 
     const handleProductClick = (productId: number) => {
-        navigate(`/products/${productId}`);
+        navigate(`/fe-react-2024/products/${productId}`);
     };
 
     const applyFilters = (productList: Product[]) => {
@@ -101,6 +93,7 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
     };
 
     const filteredProducts = applyFilters(products);
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -137,16 +130,12 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
                         </div>
                     ))}
                 </div>
-                {filteredProducts.length > productsPerPage && (
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={Math.ceil(filteredProducts.length / productsPerPage)}
-                        onPageChange={handlePageChange}
-                    />
-                )}
+                <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
             </>
         );
     }
 
-    return <section className={styles['products']}>{content}</section>;
+    return <div className={styles.products}>{content}</div>;
 };
+
+export default Products;

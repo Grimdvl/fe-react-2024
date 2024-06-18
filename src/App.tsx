@@ -6,6 +6,7 @@ import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
 import LayoutComponent from './components/layout-component/LayoutComponent';
 import PageNotFound from './components/page-not-found/PageNotFound';
+import ProductPage from './components/productPage/ProductPage';
 import { Products } from './components/products/Products';
 
 import './App.css';
@@ -45,6 +46,7 @@ function App() {
                 <Routes>
                     <Route path="/fe-react-2024/" element={<About />} index />
                     <Route path="/fe-react-2024/products" element={<Products onAddToCart={handleAddToCart} filters={filters} />} />
+                    <Route path="/fe-react-2024/products/:id" element={<ProductPage onAddToCart={handleAddToCart} />} />
                     <Route path="/404" element={<PageNotFound />} />
                     <Route path="*" element={<Navigate to="/404" />} />
                 </Routes>
