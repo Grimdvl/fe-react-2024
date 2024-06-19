@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import type Product from '../../interfaces/Product';
 import Button from '../button/Button';
+import Loading from '../loading/Loading';
+import PageNotFound from '../page-not-found/PageNotFound';
 import Pagination from '../pagination/Pagination';
 
 import { fetchData } from './dataFetcher';
@@ -100,13 +102,9 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
 
     let content;
     if (isLoading) {
-        content = (
-            <div className={styles['products-loading']}>
-                <i className="bx bx-loader-alt"></i>
-            </div>
-        );
+        return <Loading />;
     } else if (currentProducts.length === 0) {
-        content = <div className={styles['products-loading']}>No products found.</div>;
+        content = <PageNotFound />;
     } else {
         content = (
             <>

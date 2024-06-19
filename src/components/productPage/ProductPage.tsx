@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 
 import type Product from '../../interfaces/Product';
 import Button from '../button/Button';
+import Loading from '../loading/Loading';
+import PageNotFound from '../page-not-found/PageNotFound';
 import { fetchData } from '../products/dataFetcher';
 
 import styles from './productPage.module.css';
@@ -34,26 +36,22 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
     };
 
     if (isLoading) {
-        return (
-            <div className={styles['product-loading']}>
-                <i className="bx bx-loader-alt"></i>
-            </div>
-        );
+        return <Loading />;
     }
 
     if (!product) {
-        return <div className={styles.error}>Product not found.</div>;
+        return <PageNotFound />;
     }
 
     return (
-        <div className={styles['product']}>
-            <img className={styles['product-img']} src={product.images[0]} alt={product.title} />
-            <div className={styles['product__descr']}>
-                <h2 className={styles['product__descr-title']}>{product.title}</h2>
-                <p className={styles['product__descr-text']}>{product.description}</p>
-                <p className={styles['product__descr-price']}>{product.price} ₴</p>
-                <Button className={styles['product__descr--button']} onClick={handleAddToCart}>
-                    <i className="bx bx-cart"></i> Add to Cart
+        <div className={styles.product}>
+            <img className={styles.productImage} src={product.images[0]} alt={product.title} />
+            <div className={styles.productDetails}>
+                <h1 className={styles.productTitle}>{product.title}</h1>
+                <p className={styles.productDescription}>{product.description}</p>
+                <p className={styles.productPrice}>{product.price} ₴</p>
+                <Button className={styles.addToCartButton} onClick={handleAddToCart}>
+                    Add to Cart
                 </Button>
             </div>
         </div>
