@@ -66,7 +66,8 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
 
     const handleCategoryClick = (category: string, event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        const newFilters = { ...filters, category };
+        const newCategory = filters.category === category ? '' : category;
+        const newFilters = { ...filters, category: newCategory };
         setFilters(newFilters);
         onFiltersChange(newFilters);
     };

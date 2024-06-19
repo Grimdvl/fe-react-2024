@@ -43,7 +43,8 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
         setCartCounts(savedCartCounts);
     }, [products]);
 
-    const handleAddToCart = (productId: number) => {
+    const handleAddToCart = (productId: number, event: React.MouseEvent) => {
+        event.stopPropagation(); // Prevents the click event from bubbling up to the product card
         const newCartCount = (cartCounts[productId] || 0) + 1;
         const newCartCounts = { ...cartCounts, [productId]: newCartCount };
         setCartCounts(newCartCounts);
@@ -119,7 +120,10 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
                                         {product.price}
                                         <span>₴</span>
                                     </p>
-                                    <Button className={styles['card__descr--button']} onClick={() => handleAddToCart(product.id)}>
+                                    <Button
+                                        className={styles['card__descr--button']}
+                                        onClick={(event) => handleAddToCart(product.id, event)}
+                                    >
                                         <i className="bx bx-cart"></i>
                                         {cartCounts[product.id] && <span className={styles['cart__count']}>{cartCounts[product.id]}</span>}
                                     </Button>
