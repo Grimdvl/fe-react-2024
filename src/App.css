@@ -13,12 +13,18 @@
   --background-color: #111;
   --text-color: #FFF;
   --second-text-color: #111;
+  --pagination-bg: #333;
+  --pagination-border: #333;
+  --pagination-text: #656565;
 }
 
 .light {
   --background-color: #FFF;
   --text-color: #111;
   --second-text-color: #FFF;
+  --pagination-bg: #FFF;
+  --pagination-border: #F1F1F1;
+  --pagination-text: #F1F1F1;
 }
 
 html {

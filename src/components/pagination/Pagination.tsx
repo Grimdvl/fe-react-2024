@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Button from '../button/Button';
 
 import styles from './pagination.module.css';
@@ -18,7 +20,9 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
         if (totalPages <= 1) return pageNumbers;
 
         pageNumbers.push(1);
-        if (currentPage > 3) pageNumbers.push(ellipsis);
+        if (currentPage > 3) {
+            pageNumbers.push(ellipsis);
+        }
         if (currentPage > 2) pageNumbers.push(currentPage - 1);
         if (currentPage !== 1 && currentPage !== totalPages) pageNumbers.push(currentPage);
         if (currentPage < totalPages - 1) pageNumbers.push(currentPage + 1);
@@ -39,8 +43,8 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
                 <Button
                     key={index}
                     onClick={() => typeof number === 'number' && onPageChange(number)}
-                    disabled={number === currentPage || number === ellipsis}
-                    className={`${buttonClass} ${number === currentPage ? styles.active : ''}`}
+                    // disabled={typeof number === 'string'}
+                    className={`${buttonClass} ${number === currentPage ? styles.active : ''} ${number === ellipsis ? styles['ellipsis'] : ''}`}
                 >
                     {number}
                 </Button>
