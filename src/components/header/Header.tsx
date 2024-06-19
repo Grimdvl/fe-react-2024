@@ -13,9 +13,10 @@ interface HeaderProps {
     cartCount: number;
     onLinkPage: (link: string) => void;
     onFiltersChange: (filters: { search: string; category: string; sort: string }) => void;
+    updateCartCount: (newCount: number) => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFiltersChange }) => {
+export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFiltersChange, updateCartCount }) => {
     const location = useLocation();
 
     const [linkState, setLinkState] = useState({
@@ -138,7 +139,7 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
                 </div>
             </div>
 
-            {linkState.products && (
+            {linkState.products && !location.pathname.includes('/products/') && (
                 <div className={styles['head_filters']}>
                     <form className={styles['products__filters']}>
                         <div className={styles['products__filters-search']}>
@@ -197,3 +198,5 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
         </section>
     );
 };
+
+export default Header;

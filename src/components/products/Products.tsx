@@ -12,7 +12,7 @@ import { fetchData } from './dataFetcher';
 import styles from './products.module.css';
 
 interface ProductsProps {
-    onAddToCart: (newCartCount: number) => void;
+    onAddToCart: (productId: number) => void;
     filters: { search: string; category: string; sort: string };
 }
 
@@ -44,11 +44,11 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
     }, [products]);
 
     const handleAddToCart = (productId: number, event: React.MouseEvent) => {
-        event.stopPropagation(); // Prevents the click event from bubbling up to the product card
+        event.stopPropagation();
         const newCartCount = (cartCounts[productId] || 0) + 1;
         const newCartCounts = { ...cartCounts, [productId]: newCartCount };
         setCartCounts(newCartCounts);
-        onAddToCart(Object.values(newCartCounts).reduce((a, b) => a + b, 0));
+        onAddToCart(productId);
         localStorage.setItem(`cartCount_${productId}`, newCartCount.toString());
     };
 
@@ -103,7 +103,7 @@ export const Products: React.FC<ProductsProps> = ({ onAddToCart, filters }) => {
 
     let content;
     if (isLoading) {
-        return <Loading />;
+        content = <Loading />;
     } else if (currentProducts.length === 0) {
         content = <PageNotFound />;
     } else {

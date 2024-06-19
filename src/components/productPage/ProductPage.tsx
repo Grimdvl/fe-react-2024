@@ -10,29 +10,35 @@ import { fetchData } from '../products/dataFetcher';
 import styles from './productPage.module.css';
 
 interface ProductPageProps {
-    onAddToCart: (newCartCount: number) => void;
+    onAddToCart: (productId: number) => void;
 }
 
 const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
     const { id } = useParams<{ id: string }>();
     const [product, setProduct] = useState<Product | null>(null);
     const [isLoading, setLoading] = useState(true);
+    const [mainImage, setMainImage] = useState<string>('');
 
     useEffect(() => {
         setLoading(true);
         fetchData(`http://localhost:3000/products/${id}`).then((data) => {
             const products = data.find((p) => p.id === Number(id)) || null;
             setProduct(products);
+            if (products && products.images.length > 0) {
+                setMainImage(products.images[0]);
+            }
             setLoading(false);
         });
     }, [id]);
 
     const handleAddToCart = () => {
         if (product) {
-            const newCartCount = 1;
-            onAddToCart(newCartCount);
-            localStorage.setItem(`cartCount_${product.id}`, newCartCount.toString());
+            onAddToCart(product.id);
         }
+    };
+
+    const handleImageClick = (image: string) => {
+        setMainImage(image);
     };
 
     if (isLoading) {
@@ -44,13 +50,36 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
     }
 
     return (
-        <div className={styles.product}>
-            <img className={styles.productImage} src={product.images[0]} alt={product.title} />
-            <div className={styles.productDetails}>
-                <h1 className={styles.productTitle}>{product.title}</h1>
-                <p className={styles.productDescription}>{product.description}</p>
-                <p className={styles.productPrice}>{product.price} ₴</p>
-                <Button className={styles.addToCartButton} onClick={handleAddToCart}>
+        <div className={styles['product']}>
+            <div className={styles['product__img']}>
+                <div className={styles['product__img-wrapper']}>
+                    {product.images.map((image, index) => (
+                        <img
+                            key={index}
+                            className={styles['img-secondary']}
+                            src={image}
+                            alt={product.title}
+                            onClick={() => handleImageClick(image)}
+                        />
+                    ))}
+                </div>
+                <img className={styles['product__img-primary']} src={mainImage} alt={product.title} />
+            </div>
+            <div className={styles['product__descr']}>
+                <Button className={styles['product__descr--back']} onClick={() => window.history.back()}>
+                    <i className="bx bx-chevron-left"></i>
+                    Back
+                </Button>
+                <h2 className={styles['product__descr-title']}>{product.title}</h2>
+                <Button className={styles['product__descr--category']} onClick={() => {}}>
+                    {product.category.name}
+                </Button>
+                <p className={styles['product__descr-text']}>{product.description}</p>
+                <p className={styles['product__descr-price']}>
+                    {product.price} <span>₴</span>
+                </p>
+                <Button className={styles['product__descr--add']} onClick={handleAddToCart}>
+                    <i className="bx bx-cart"></i>
                     Add to Cart
                 </Button>
             </div>

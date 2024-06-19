@@ -26,9 +26,12 @@ function App() {
         }
     }, []);
 
-    const handleAddToCart = (newCartCount: number) => {
-        setCartCount(newCartCount);
-        localStorage.setItem('cartCount', newCartCount.toString());
+    const handleAddToCart = (productId: number) => {
+        const existingCartCount = localStorage.getItem(`cartCount_${productId}`);
+        const newCartCount = existingCartCount ? Number(existingCartCount) + 1 : 1;
+        setCartCount((previousCount) => previousCount + 1);
+        localStorage.setItem(`cartCount_${productId}`, newCartCount.toString());
+        localStorage.setItem('cartCount', (cartCount + 1).toString());
     };
 
     const handleFiltersChange = (newFilters: { search: string; category: string; sort: string }) => {
@@ -40,7 +43,12 @@ function App() {
     return (
         <Router>
             <header>
-                <Header cartCount={cartCount} onFiltersChange={handleFiltersChange} onLinkPage={handleLinkPage} />
+                <Header
+                    cartCount={cartCount}
+                    onFiltersChange={handleFiltersChange}
+                    onLinkPage={handleLinkPage}
+                    updateCartCount={setCartCount}
+                />
             </header>
             <LayoutComponent>
                 <Routes>
