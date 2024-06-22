@@ -75,13 +75,15 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
                     {product.category.name}
                 </Button>
                 <p className={styles['product__descr-text']}>{product.description}</p>
-                <p className={styles['product__descr-price']}>
-                    {product.price} <span>₴</span>
-                </p>
-                <Button className={styles['product__descr--add']} onClick={handleAddToCart}>
-                    <i className="bx bx-cart"></i>
-                    Add to Cart
-                </Button>
+                <div className={styles['product__descr-price']}>
+                    <p className={styles['price__number']}>
+                        {product.price} <span className={styles['price__num-sumbol']}>₴</span>
+                    </p>
+                    <Button className={styles['price--add']} onClick={handleAddToCart}>
+                        <i className="bx bx-cart"></i>
+                        Add to Cart
+                    </Button>
+                </div>
             </div>
         </div>
     );

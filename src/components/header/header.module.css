@@ -219,14 +219,14 @@ header {
 .filters--clothes,
 .products__filters-sort select {
   height: 100%;
-  color: var(--text-color);
+  color: var(--product-category-text);
   background-color: var(--background-color);
   line-height: 1.7rem;
   font-size: 1.4rem;
   font-weight: 400;
   border-radius: 3rem;
   border: .1rem solid #CCC;
-  padding: 0 1rem;
+  padding: 1rem 2rem;
   cursor: pointer;
   transition: .5s ease background-color, .5s ease color, .5s ease border-color;
 }
@@ -309,7 +309,6 @@ header {
 
   .products__filters-staff {
     justify-content: center;
-    /* padding: 0; */
   }
 }
 

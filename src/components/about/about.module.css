@@ -32,12 +32,12 @@
 
 .intro {
   text-decoration: underline;
-  color: #111;
+  color: var(--text-color);
 }
 
 .link {
   text-decoration: underline;
-  color: #111;
+  color: var(--text-color);
 }
 
 @media (max-width: 991px) {

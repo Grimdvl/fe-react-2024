@@ -43,7 +43,6 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
                 <Button
                     key={index}
                     onClick={() => typeof number === 'number' && onPageChange(number)}
-                    // disabled={typeof number === 'string'}
                     className={`${buttonClass} ${number === currentPage ? styles.active : ''} ${number === ellipsis ? styles['ellipsis'] : ''}`}
                 >
                     {number}
