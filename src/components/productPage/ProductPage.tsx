@@ -18,6 +18,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
     const [product, setProduct] = useState<Product | null>(null);
     const [isLoading, setLoading] = useState(true);
     const [mainImage, setMainImage] = useState<string>('');
+    const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
     useEffect(() => {
         setLoading(true);
@@ -26,6 +27,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
             setProduct(products);
             if (products && products.images.length > 0) {
                 setMainImage(products.images[0]);
+                setCurrentImageIndex(0);
             }
             setLoading(false);
         });
@@ -37,8 +39,16 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
         }
     };
 
-    const handleImageClick = (image: string) => {
+    const handleImageClick = (image: string, index: number) => {
         setMainImage(image);
+        setCurrentImageIndex(index);
+    };
+
+    const handlePageChange = (page: number) => {
+        if (product && product.images[page]) {
+            setMainImage(product.images[page]);
+            setCurrentImageIndex(page);
+        }
     };
 
     if (isLoading) {
@@ -56,14 +66,28 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
                     {product.images.map((image, index) => (
                         <img
                             key={index}
-                            className={styles['img-secondary']}
+                            className={`${styles['img-secondary']} ${index === currentImageIndex ? styles['active'] : ''}`}
                             src={image}
                             alt={product.title}
-                            onClick={() => handleImageClick(image)}
+                            onClick={() => handleImageClick(image, index)}
                         />
                     ))}
                 </div>
+                <Button
+                    onClick={() => handlePageChange(currentImageIndex - 1)}
+                    disabled={currentImageIndex === 0}
+                    className={`${styles['pagination--button']} ${styles['left--button']}`}
+                >
+                    <i className="bx bx-chevron-left"></i>
+                </Button>
                 <img className={styles['product__img-primary']} src={mainImage} alt={product.title} />
+                <Button
+                    onClick={() => handlePageChange(currentImageIndex + 1)}
+                    disabled={currentImageIndex === product.images.length - 1}
+                    className={`${styles['pagination--button']} ${styles['right--button']}`}
+                >
+                    <i className="bx bx-chevron-right"></i>
+                </Button>
             </div>
             <div className={styles['product__descr']}>
                 <Button className={styles['product__descr--back']} onClick={() => window.history.back()}>

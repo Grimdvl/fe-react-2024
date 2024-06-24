@@ -363,3 +363,10 @@ header {
     padding: 2rem 10%;
   }
 }
+
+@media (max-width: 400px) {
+
+  .products__filters-staff {
+    padding: 0;
+  }
+}

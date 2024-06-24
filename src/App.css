@@ -82,4 +82,8 @@ footer {
   html {
     font-size: 50%;
   }
+
+  main {
+    padding: 9rem 10% 2rem;
+  }
 }

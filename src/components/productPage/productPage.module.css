@@ -4,17 +4,19 @@
   display: flex;
   column-gap: 4rem;
   align-items: center;
-  width: 117.5rem;
+  max-width: 117.5rem;
   min-height: 47rem;
   padding: 3.5rem 7.5rem;
+  justify-content: space-between;
 }
 
 .product__img {
   display: flex;
+  position: relative;
   justify-content: flex-start;
   column-gap: 2rem;
-  height: 40rem;
-  width: 44.4rem;
+  min-height: 40rem;
+  height: 100%;
 }
 
 .product__img-wrapper {
@@ -22,8 +24,6 @@
   flex-direction: column;
   justify-content: center;
   row-gap: 3rem;
-  height: 100%;
-  width: 100%;
 }
 
 .img-secondary {
@@ -34,9 +34,8 @@
 
 .product__img-primary {
   border-radius: 2rem;
-  height: 100%;
-  width: 20vw;
-  /* width: 35.4rem; */
+  width: 19vw;
+  object-fit: cover;
 }
 
 .product__descr-title {
@@ -99,6 +98,7 @@
   display: flex;
   flex-direction: column;
   align-items: start;
+  max-width: 50rem;
 }
 
 .product__descr--back {
@@ -134,9 +134,96 @@
   font-size: 2.4rem;
 }
 
+.pagination--button {
+  display: none;
+  position: absolute;
+  border-radius: 1rem;
+  top: 35%;
+  background-color: rgba(255, 255, 255, .7);
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.pagination--button:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+.pagination--button i {
+  font-size: 2.4rem;
+}
+
+.pagination--button:first-of-type {
+  left: -3rem;
+}
+
+.pagination--button:last-of-type {
+  right: -3rem;
+}
+
 @media (max-width: 991px) {
 
   .product {
     flex-wrap: wrap;
+  }
+
+  .product__descr-title {
+    margin-top: 8rem;
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 3.2rem;
+  }
+
+  .product__img {
+    flex-direction: column-reverse;
+    justify-content: center;
+    margin: 0 auto;
+    row-gap: 2rem;
+  }
+
+  .product__img-wrapper {
+    flex-direction: row;
+    column-gap: 2rem;
+  }
+
+  .product__img-primary {
+    margin: 0 auto;
+    width: 80%;
+  }
+
+  .pagination--button {
+    display: block;
+  }
+
+  .product__descr--back {
+    position: absolute;
+    top: 92.5%;
+    right: 81%;
+  }
+
+  .price__number {
+    position: absolute;
+    font-size: 2.7rem;
+    line-height: 3.3rem;
+    font-weight: 600;
+    top: 2rem;
+    left: 0;
+  }
+
+  .product__descr-price {
+    justify-content: end;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .product {
+    flex-wrap: wrap;
+    padding: 3.5rem;
+  }
+
+  .product__descr--back {
+    top: 95%;
+    right: 70%;
   }
 }
