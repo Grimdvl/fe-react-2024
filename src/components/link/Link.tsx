@@ -1,7 +1,9 @@
-const Link = ({ target = '_blank', children, ...restProps }: React.ComponentProps<'a'>) => (
-    <a target={target} {...restProps} rel="noreferrer">
+import { Link as RouterLink } from 'react-router-dom';
+
+const Link = ({ to, children, className, ...restProps }: React.ComponentProps<typeof RouterLink> & { className?: string }) => (
+    <RouterLink to={to} className={className} {...restProps}>
         {children}
-    </a>
+    </RouterLink>
 );
 
 export default Link;

@@ -1,0 +1,19 @@
+.products-loading {
+  font-size: 5rem;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  display: block;
+}
+
+.products-loading i {
+  animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

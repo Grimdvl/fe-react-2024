@@ -1,5 +1,6 @@
 import type { ChangeEvent, MouseEvent } from 'react';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import maLogo from '@/assets/ma.svg';
 
@@ -12,9 +13,12 @@ interface HeaderProps {
     cartCount: number;
     onLinkPage: (link: string) => void;
     onFiltersChange: (filters: { search: string; category: string; sort: string }) => void;
+    updateCartCount: (newCount: number) => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFiltersChange }) => {
+export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFiltersChange, updateCartCount }) => {
+    const location = useLocation();
+
     const [linkState, setLinkState] = useState({
         about: true,
         products: false,
@@ -30,6 +34,15 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
         document.documentElement.className = savedTheme;
     }, []);
 
+    useEffect(() => {
+        const path = location.pathname;
+        if (path.includes('/products')) {
+            setLinkState({ about: false, products: true });
+        } else {
+            setLinkState({ about: true, products: false });
+        }
+    }, [location]);
+
     const handleThemeToggle = () => {
         const newTheme = theme === 'light' ? 'dark' : 'light';
         setTheme(newTheme);
@@ -37,12 +50,10 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
         document.documentElement.className = newTheme;
     };
 
-    const handleLinkClick = (link: string, event: MouseEvent<HTMLAnchorElement>) => {
-        event.preventDefault();
+    const handleLinkClick = (link: string) => {
         setLinkState({
-            ...linkState,
-            [link]: true,
-            [link === 'about' ? 'products' : 'about']: false,
+            about: link === 'about',
+            products: link === 'products',
         });
         onLinkPage(link);
     };
@@ -56,7 +67,8 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
 
     const handleCategoryClick = (category: string, event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        const newFilters = { ...filters, category };
+        const newCategory = filters.category === category ? '' : category;
+        const newFilters = { ...filters, category: newCategory };
         setFilters(newFilters);
         onFiltersChange(newFilters);
     };
@@ -66,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
             <div className={styles['head_container']}>
                 <div className={styles['head__wrapper-first']}>
                     <div className={styles['head__logo']}>
-                        <Link href="https://www.mastersacademy.education/" className={styles['head__logo-ma']}>
+                        <Link to="https://www.mastersacademy.education/" className={styles['head__logo-ma']}>
                             <img src={maLogo} alt="Masters Academy logo" className={styles['head__logo-ma--link']} />
                         </Link>
                     </div>
@@ -90,16 +102,16 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
                 <div className={styles['head__wrapper-second']}>
                     <div className={styles['head__navigation']}>
                         <Link
-                            href="#"
+                            to="/fe-react-2024/"
                             className={`${styles['head__navigation--link']} ${linkState.about ? styles['active'] : ''}`}
-                            onClick={(event) => handleLinkClick('about', event)}
+                            onClick={() => handleLinkClick('about')}
                         >
                             About
                         </Link>
                         <Link
-                            href="#"
+                            to="/fe-react-2024/products"
                             className={`${styles['head__navigation--link']} ${linkState.products ? styles['active'] : ''}`}
-                            onClick={(event) => handleLinkClick('products', event)}
+                            onClick={() => handleLinkClick('products')}
                         >
                             Products
                         </Link>
@@ -127,7 +139,7 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
                 </div>
             </div>
 
-            {linkState.products && (
+            {linkState.products && !location.pathname.includes('/products/') && (
                 <div className={styles['head_filters']}>
                     <form className={styles['products__filters']}>
                         <div className={styles['products__filters-search']}>
@@ -186,3 +198,5 @@ export const Header: React.FC<HeaderProps> = ({ cartCount, onLinkPage, onFilters
         </section>
     );
 };
+
+export default Header;

@@ -13,12 +13,26 @@
   --background-color: #111;
   --text-color: #FFF;
   --second-text-color: #111;
+  --pagination-bg: #333;
+  --pagination-border: #333;
+  --pagination-text: #656565;
+  --product-border: #656565;
+  --product-buttons-border: #656565;
+  --product-category-text: #FFF;
+  --product-buttons-text-second: #FFF;
 }
 
 .light {
   --background-color: #FFF;
   --text-color: #111;
   --second-text-color: #FFF;
+  --pagination-bg: #FFF;
+  --pagination-border: #F1F1F1;
+  --pagination-text: #F1F1F1;
+  --product-border: #CCC;
+  --product-buttons-border: #E1E1E1;
+  --product-category-text: #656565;
+  --product-buttons-text-second: #333;
 }
 
 html {
@@ -67,5 +81,9 @@ footer {
 
   html {
     font-size: 50%;
+  }
+
+  main {
+    padding: 9rem 10% 2rem;
   }
 }
